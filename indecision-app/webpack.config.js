@@ -8,4 +8,22 @@ module.exports = {
 		path: path.join(__dirname, "public"),
 		filename: "bundle.js",
 	},
+	module: {
+		rules: [
+			{
+				loader: "babel-loader",
+				test: /\.js$/,
+				exclude: /node_modules/,
+			},
+		],
+	},
+	devtool: "eval-cheap-module-source-map",
+	devServer: {
+		static: {
+			directory: path.join(__dirname, "public"),
+		},
+		compress: true,
+		port: 9000,
+	},
+	mode: "development",
 };
