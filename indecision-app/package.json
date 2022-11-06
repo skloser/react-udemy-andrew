@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "server": "live-server public/",
-    "build": "webpack",
+    "build": "webpack --watch",
     "dev-server": "webpack-dev-server"
   },
   "dependencies": {
@@ -16,10 +16,15 @@
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-env": "1.5.2",
     "babel-preset-react": "6.24.1",
+    "css-loader": "^6.7.1",
     "live-server": "^1.2.2",
+    "node-sass": "^7.0.3",
+    "normalize.css": "^8.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-modal": "^3.16.1",
+    "sass-loader": "^13.1.0",
+    "style-loader": "^3.3.1",
     "validator": "^13.7.0",
     "webpack": "^5.74.0",
     "webpack-dev-server": "^4.11.1"
