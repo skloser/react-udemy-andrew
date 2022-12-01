@@ -1,4 +1,4 @@
-import moment from "moment/moment";
+import moment from "moment";
 import expenseReducer from "../../reducers/expenses";
 
 const expensesReducerDefaultState = [
