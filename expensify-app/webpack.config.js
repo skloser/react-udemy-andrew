@@ -29,7 +29,6 @@ module.exports = (env) => {
 		devServer: {
 			static: {
 				directory: path.join(__dirname, "public"),
-				publicPath: "/dist/",
 			},
 			historyApiFallback: true,
 			compress: true,
