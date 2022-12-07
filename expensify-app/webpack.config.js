@@ -9,6 +9,7 @@ module.exports = (env) => {
 		output: {
 			path: path.join(__dirname, "public"),
 			filename: "bundle.js",
+			publicPath: "/dist",
 		},
 		module: {
 			rules: [
@@ -28,6 +29,7 @@ module.exports = (env) => {
 		devServer: {
 			static: {
 				directory: path.join(__dirname, "public"),
+				publicPath: "/dist/",
 			},
 			historyApiFallback: true,
 			compress: true,
