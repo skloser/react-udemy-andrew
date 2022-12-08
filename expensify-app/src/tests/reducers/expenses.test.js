@@ -1,5 +1,6 @@
 import moment from "moment";
 import expenseReducer from "../../reducers/expenses";
+import expenses from "../fixtures/expenses";
 
 const expensesReducerDefaultState = [
 	{
@@ -62,4 +63,14 @@ test("should reduce edit expense", () => {
 			id: "1",
 		},
 	]);
+});
+
+test("should set expenses", () => {
+	const action = {
+		type: "SET_EXPENSES",
+		expenses,
+	};
+
+	const result = expenseReducer(expenses, action);
+	expect(result).toEqual(expenses);
 });
