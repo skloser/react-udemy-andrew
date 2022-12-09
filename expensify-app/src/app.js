@@ -6,6 +6,7 @@ import configureStore from "./store/configureStore";
 import { startSetExpenses } from "./actions/expenses";
 import { setTextFilter, sortByDate } from "./actions/filters";
 import getVisibleExpenses from "./selectors/expenses";
+import { getAuth } from "firebase/auth";
 import "normalize.css/normalize.css";
 import "./styles/styles.scss";
 import "react-dates/lib/css/_datepicker.css";
@@ -46,4 +47,12 @@ ReactDOM.render(<p>Loading...</p>, document.getElementById("app"));
 
 store.dispatch(startSetExpenses()).then(() => {
 	ReactDOM.render(jsx, document.getElementById("app"));
+});
+
+getAuth().onAuthStateChanged((user) => {
+	if (user) {
+		console.log("log in");
+	} else {
+		console.log("log out");
+	}
 });
