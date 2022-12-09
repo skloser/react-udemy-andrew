@@ -14,7 +14,6 @@ test("should filter reducer set text filter", () => {
 		sortBy: "amount", //date or amount
 		startDate: moment().startOf("month"),
 		endDate: moment().endOf("month"),
-		type: "SET_TEXT_FILTER",
 	});
 });
 

@@ -10,6 +10,7 @@ import {
 	onValue,
 	child,
 	get,
+	remove,
 } from "firebase/database";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -40,6 +41,7 @@ export {
 	child,
 	set,
 	onValue,
+	remove,
 	database as default,
 };
 
@@ -63,7 +65,6 @@ export {
 // 	.catch(() => {
 // 		console.log("No such document");
 // 	});
-
 // const expensesListRef = ref(database, "expenses");
 
 // const expenses = query(expensesListRef);
@@ -73,14 +74,14 @@ export {
 // 	description: "Rent",
 // 	note: "",
 // 	amount: 10900,
-// 	createdAt: 4234534645,
+// 	createdAt: 1670572194237,
 // });
 
 // const newExpenseRef2 = push(expensesListRef, {
 // 	description: "Rent2",
 // 	note: "a",
 // 	amount: 100,
-// 	createdAt: 9234534645,
+// 	createdAt: 1670572194237,
 // });
 
 // const newExpenseRef3 = push(expensesListRef, {
