@@ -1,10 +1,9 @@
-import { update } from "firebase/database";
+import { set, update } from "firebase/database";
 import database, {
 	ref,
 	push,
 	getDatabase,
 	get,
-	remove,
 	child,
 } from "../firebase/firebase";
 
@@ -16,7 +15,8 @@ export const addExpense = (expense) => ({
 });
 
 export const startAddExpense = (expenseData = {}) => {
-	return (dispatch) => {
+	return (dispatch, getState) => {
+		const uid = getState().auth.uid;
 		const {
 			description = "",
 			note = "",
@@ -25,14 +25,16 @@ export const startAddExpense = (expenseData = {}) => {
 		} = expenseData;
 		const expense = { description, note, amount, createdAt };
 
-		return push(ref(database, "expenses"), { expense }).then((expenseRef) => {
-			dispatch(
-				addExpense({
-					id: expenseRef.key,
-					...expense,
-				})
-			);
-		});
+		return push(ref(database, `users/${uid}/expenses`), expense).then(
+			(expenseRef) => {
+				dispatch(
+					addExpense({
+						id: expenseRef.key,
+						...expense,
+					})
+				);
+			}
+		);
 	};
 };
 
@@ -44,9 +46,11 @@ export const removeExpense = (id) => ({
 });
 
 export const startRemoveExpense = (id) => {
-	return (dispatch) => {
-		const dbRef = ref(getDatabase());
-		return remove(dbRef, "expenses/" + id).then(() => {
+	return (dispatch, getState) => {
+		const uid = getState().auth.uid;
+		const db = getDatabase();
+
+		return set(ref(db, `users/${uid}/expenses/${id}`), null).then(() => {
 			dispatch(removeExpense(id));
 		});
 	};
@@ -61,11 +65,12 @@ export const editExpense = (id, updates) => ({
 });
 
 export const startEditExpense = (id, data) => {
-	return (dispatch) => {
+	return (dispatch, getState) => {
+		const uid = getState().auth.uid;
 		const dbRef = ref(getDatabase());
 		const updates = {};
 
-		updates["/expenses/" + id] = data;
+		updates[`users/${uid}/expenses/${id}`] = data;
 
 		return update(dbRef, updates).then(() => {
 			dispatch(editExpense(id, data));
@@ -81,10 +86,11 @@ export const setExpenses = (expenses) => ({
 });
 
 export const startSetExpenses = () => {
-	return (dispatch) => {
+	return (dispatch, getState) => {
+		const uid = getState().auth.uid;
 		const dbRef = ref(getDatabase());
 
-		return get(child(dbRef, "expenses")).then((snapshot) => {
+		return get(child(dbRef, `users/${uid}/expenses`)).then((snapshot) => {
 			const expenses = [];
 			snapshot.forEach((expenseChildSnapshot) => {
 				expenses.push({
