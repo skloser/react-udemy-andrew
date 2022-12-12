@@ -1,8 +1,8 @@
 import moment from "moment";
 
 const filtersReducerDefaultState = {
-	text: "rent",
-	sortBy: "amount", //date or amount
+	text: "",
+	sortBy: "date", //date or amount
 	startDate: moment().startOf("month"),
 	endDate: moment().endOf("month"),
 };
